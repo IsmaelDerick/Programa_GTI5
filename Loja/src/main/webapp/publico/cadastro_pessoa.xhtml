@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro de Usuários</title>
+</h:head>
+
+
+
+<h:body>
+	<h:form id="form">
+
+		<p:dock position="top">
+			<p:menuitem value="Início" outcome="/publico/index.xhtml"
+				icon="/Imagens/inicio.png" />
+			<p:menuitem value="Carrinho" actionListener="#{carrinhoC.irCarrinho}"
+				action="/cliente/carrinho.xhtml" icon="/Imagens/carrinho.png" />
+			<p:menuitem value="Area do Cliente"
+				outcome="/cliente/principal.xhtml" icon="/Imagens/cliente.png" />
+			<p:menuitem value="Acesso Administrador"
+				outcome="/admin/principal.xhtml" icon="/Imagens/administrador.png" />
+		</p:dock>
+
+		<p:panel>
+			<div align="center">
+
+
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputLabel value="Novo Usuário" />
+					</f:facet>
+					<h:outputLabel value="Nome" />
+					<p:inputText value="#{pessoaC.pessoa.nome}" />
+					<h:outputLabel value="CPF" />
+					<p:inputText value="#{pessoaC.pessoa.cpf}" />
+					<h:outputLabel value="RG" />
+					<p:inputText value="#{pessoaC.pessoa.rg}" />
+					<h:outputLabel value="Rua" />
+					<p:inputText value="#{pessoaC.pessoa.rua}" />
+					<h:outputLabel value="Bairro" />
+					<p:inputText value="#{pessoaC.pessoa.bairro}" />
+					<h:outputLabel value="Cidade" />
+					<p:inputText value="#{pessoaC.pessoa.cidade}" />
+					<h:outputLabel value="UF" />
+					<p:selectOneMenu value="#{pessoaC.pessoa.uf}">
+						<f:selectItem itemValue="AC" itemLabel="AC" />
+						<f:selectItem itemValue="AL" itemLabel="AL" />
+						<f:selectItem itemValue="AP" itemLabel="AP" />
+						<f:selectItem itemValue="AM" itemLabel="AM" />
+						<f:selectItem itemValue="BA" itemLabel="BA" />
+						<f:selectItem itemValue="CE" itemLabel="CE" />
+						<f:selectItem itemValue="DF" itemLabel="DF" />
+						<f:selectItem itemValue="ES" itemLabel="ES" />
+						<f:selectItem itemValue="GO" itemLabel="GO" />
+						<f:selectItem itemValue="MA" itemLabel="MA" />
+						<f:selectItem itemValue="MT" itemLabel="MT" />
+						<f:selectItem itemValue="MS" itemLabel="MS" />
+						<f:selectItem itemValue="MG" itemLabel="MG" />
+						<f:selectItem itemValue="PA" itemLabel="PA" />
+						<f:selectItem itemValue="PB" itemLabel="PB" />
+						<f:selectItem itemValue="PR" itemLabel="PR" />
+						<f:selectItem itemValue="PE" itemLabel="PE" />
+						<f:selectItem itemValue="PI" itemLabel="PI" />
+						<f:selectItem itemValue="RJ" itemLabel="RJ" />
+						<f:selectItem itemValue="RN" itemLabel="RN" />
+						<f:selectItem itemValue="RS" itemLabel="RS" />
+						<f:selectItem itemValue="RO" itemLabel="RO" />
+						<f:selectItem itemValue="RR" itemLabel="RR" />
+						<f:selectItem itemValue="SC" itemLabel="SC" />
+						<f:selectItem itemValue="SP" itemLabel="SP" />
+						<f:selectItem itemValue="SE" itemLabel="SE" />
+						<f:selectItem itemValue="TO" itemLabel="TO" />
+					</p:selectOneMenu>
+					<h:outputLabel value="CEP" />
+					<p:inputText value="#{pessoaC.pessoa.cep}" />
+					<h:outputLabel value="Data de Nascimento" />
+					<p:calendar id="mask" value="#{pessoaC.pessoa.data_nasc}"
+						pattern="dd-MM-yyyy" mask="true" />
+					<h:outputLabel value="Email" />
+					<p:inputText value="#{pessoaC.pessoa.email}" />
+					<h:outputLabel value="Senha" />
+					<p:inputText value="#{pessoaC.pessoa.senha}" />
+
+					<h:outputLabel value="Tipo" />
+					<p:selectOneMenu value="#{pessoaC.pessoa.tipo}">
+						<f:selectItem itemValue="ROLE_CLIENTE" itemLabel="Cliente" />
+						<f:selectItem itemValue="ROLE_ADMINISTRADOR"
+							itemLabel="Administrador" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+
+				<h:dataTable value="#{pessoaC.pessoa.fones}" var="fones">
+					<f:facet name="header">
+						<h:commandButton value="Adicionar Fone"
+							action="#{pessoaC.addFone}" icon=" ui-icon-plusthick" />
+					</f:facet>
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Número" />
+						</f:facet>
+						<h:inputText value="#{pessoaC.fone.numero}" size="20"
+							maxlength="20" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Descrição" />
+						</f:facet>
+						<h:inputText value="#{pessoaC.fone.descricao}" size="30"
+							maxlength="30" />
+					</h:column>
+					<h:column>
+						<h:commandLink value="Remover"
+							action="#{pessoaC.deletFone(fones)}" />
+					</h:column>
+				</h:dataTable>
+
+				<p:commandButton value="Gravar" action="#{pessoaC.actionGravar}"
+					icon="ui-icon-disk">
+				</p:commandButton>
+			</div>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

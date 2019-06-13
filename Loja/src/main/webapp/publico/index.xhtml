@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Início</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:dock position="bottom">
+			<p:menuitem value="Início" outcome="/publico/index.xhtml"
+				icon="/Imagens/inicio.png" />
+			<p:menuitem value="Cadastro" outcome="/publico/cadastro_pessoa.xhtml"
+				icon="/Imagens/cadastrar.png" />
+			<p:menuitem value="Carrinho" actionListener="#{carrinhoC.irCarrinho}"
+				action="/cliente/carrinho.xhtml" icon="/Imagens/carrinho.png" />
+			<p:menuitem value="Area do Cliente"
+				outcome="/cliente/principal.xhtml" icon="/Imagens/cliente.png" />
+			<p:menuitem value="Acesso Administrador"
+				outcome="/admin/principal.xhtml" icon="/Imagens/administrador.png" />
+		</p:dock>
+		
+		<p:carousel value="#{produtoC.listagem}" headerText="Produtos"
+			var="pro" itemStyle="text-align:center" responsive="true">
+			<p:panel header="#{pro.nome}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<h:outputText value="R$ #{pro.preco}" />
+
+					<p:commandButton value="Adicionar ao carrinho"
+						actionListener="#{carrinhoC.addProdCar(pro)}"
+						icon="ui-icon-suitcase" />
+
+				</h:panelGrid>
+			</p:panel>
+		</p:carousel>
+	</h:form>
+</h:body>
+</html>

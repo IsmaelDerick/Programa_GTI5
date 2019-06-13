@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Área do Cliente</title>
+</h:head>
+<h:body>
+
+	<h:form id="form">
+	
+		<p:tabMenu activeIndex="#{param.i}">
+			<p:menuitem value="Início" outcome="/publico/index.xhtml"
+				icon="ui-icon-home" />
+			<p:menuitem value="Cadastrar Usuário"
+				outcome="/publico/cadastro_pessoa.xhtml" icon="ui-icon-plus" />
+			<p:menuitem value="Carrinho" actionListener="#{carrinhoC.irCarrinho}"
+				action="/cliente/carrinho.xhtml" icon="ui-icon-cart" />
+			<p:menuitem value="Area do Cliente"
+				outcome="/cliente/principal.xhtml" icon="ui-icon-person" />
+			<p:menuitem value="Acesso Administrador"
+				outcome="/admin/principal.xhtml" icon="ui-icon-gear" />
+		</p:tabMenu>
+		<div align="center">
+			<p:panel>
+				<f:facet name="header">Área - Cliente</f:facet>
+
+				<p:commandButton value="Logout"
+					onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
+					icon="ui-icon-power" />
+
+			</p:panel>
+		</div>
+	</h:form>
+</h:body>
+
+</html>

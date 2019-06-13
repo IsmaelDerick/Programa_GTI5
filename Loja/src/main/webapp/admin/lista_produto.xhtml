@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Produto</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+
+		<p:growl id="msgs" showDetail="true" />
+		<p:tabMenu activeIndex="#{param.i}">
+			<p:menuitem value="Início" outcome="/publico/index.xhtml"
+				icon="ui-icon-home" />
+			<p:menuitem value="Cadastrar Usuário"
+				outcome="/publico/cadastro_pessoa.xhtml" icon="ui-icon-plus" />
+			<p:menuitem value="Area do Cliente"
+				outcome="/cliente/principal.xhtml" icon="ui-icon-person" />
+			<p:menuitem value="Acesso Administrador"
+				outcome="/admin/principal.xhtml" icon="ui-icon-gear" />
+		</p:tabMenu>
+		<p:dataTable id="tbl" var="f" value="#{produtoCtrl.listagem}"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
+					 {PageLinks} {NextPageLink} {LastPageLink}"
+			paginator="true" rows="10" style="margim-bottom:20px">
+
+			<f:facet name="header">
+				<h:outputLabel value="Lista de Produtos" />
+				<p:commandButton value="Inserir" icon="icon-novo"
+					actionListener="#{produtoCtrl.insertProd}"
+					oncomplete="PF('cadDialog').show()" update=":form:cadDetail">
+				</p:commandButton>
+			</f:facet>
+
+			<p:column headerText="Código" sortBy="pro.id">
+				<h:outputText value="#{pro.id}" />
+			</p:column>
+			<p:column headerText="Nome" sortBy="pro.nome">
+				<h:outputText value="#{pro.nome}" />
+			</p:column>
+			<p:column headerText="Preco" sortBy="pro.preco">
+				<h:outputText value="#{pro.preco}" />
+			</p:column>
+
+			<p:column style="width:32px;text-align: center">
+				<p:commandButton update=":form:cadDetail"
+					oncomplete="PF('cadDialog').show()" icon="ui-icon-search"
+					title="View">
+					<f:setPropertyActionListener value="#{f}"
+						target="#{produtoCtrl.produto}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+
+		<p:dialog header="Cadastro Produtos" widgetVar="cadDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="cadDetail" style="text-align: center;">
+				<h:panelGrid columns="2" style="text-align: left">
+					<h:outputLabel value="Nome" />
+					<p:inputText value="#{produtoC.produto.nome}" size="30"
+						maxlength="20" />
+					<h:outputLabel value="Preço" />
+					<p:inputText value="#{produtoC.produto.preco}" size="6"
+						maxlength="10" />
+				</h:panelGrid>
+				<h:commandButton value="Excluir" action="#{produtoC.deletProd}"
+					update="growl" />
+				<h:commandButton value="Gravar" action="#{produtoC.gravarProd}"
+					update="growl" />
+				<h:commandButton value="Cancelar" oncomplete="cadDialog.hide()" />
+			</p:outputPanel>
+
+		</p:dialog>
+	</h:form>
+</h:body>
+
+</html>
